@@ -44,7 +44,7 @@ def makeVisionRequestforImg(jsonobj, apikey):
             r = e
             # catastrophic error. bail.
             print(e) 
-            input("continue? (y/n)")
+            flag_retry=input("continue? (y/n)")
     return r
 
 def main(apikey, alreadyprocessed):
