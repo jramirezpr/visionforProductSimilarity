@@ -10,6 +10,7 @@ import json
 import requests
 import glob
 import os
+from time import sleep
 
 
 def encode_image(image):
@@ -44,9 +45,17 @@ def makeVisionRequestforImg(jsonobj, apikey):
                               auth=authorization)
         except requests.exceptions.RequestException as e:
             r = e
-            # catastrophic error. bail.
-            print(e)
-            flag_retry = input("continue? (y/n)")
+            print(r)
+            sleep(4)
+            try:
+                r = requests.post(url + apikey,
+                                  json=jsonobj,
+                                  auth=authorization)
+            except requests.exceptions.RequestException as e2:
+                r = e2
+                # catastrophic error. bail.
+                print(e2)
+                flag_retry = input("continue? (y/n)")
     return r
 
 
